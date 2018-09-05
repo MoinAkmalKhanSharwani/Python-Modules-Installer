@@ -1,2 +1,2 @@
 # Python-Modules-Installer
-This program is only for windows
+This program is only for windows :)
