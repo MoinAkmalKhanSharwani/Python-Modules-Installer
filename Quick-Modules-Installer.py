@@ -78,7 +78,7 @@ try:
                         print("You have many folder or versions of python. \nPlease Select your python folder or latest version")
                         while True:
                             try:
-                                foldernum=int(input("Type the Number of your python folder whick show in display : "))
+                                foldernum=int(input("Type the Number of your python folder which how in display : "))
                                 if foldernum:
                                     if foldernum > i:
                                         print("Error: {} not found \nThe number you type is too high and not found in the list of folders.".format(foldernum))
