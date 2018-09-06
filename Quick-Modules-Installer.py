@@ -40,21 +40,27 @@ try:
                     print("(2)",pyveri2)
                     print("Please select your python folder")
                     while True:
-                        ans1 = input("Type 1 to select {} or Type 2 to select {} : ".format(pyveri1,pyveri2))
-                        if ans1:
-                            if ans1 == "1":
-                                veri =pyveri1
-                                break
-                            elif ans1 == "2":
-                                veri =pyveri2
-                                break 
+                        try:
+                            ans1 = input("Type 1 to select {} or Type 2 to select {} : ".format(pyveri1,pyveri2))
+                            if ans1:
+                                if ans1 == "1":
+                                    veri =pyveri1
+                                    break
+                                elif ans1 == "2":
+                                    veri =pyveri2
+                                    break
+                                elif  ans1.lower()[0:6] == pyveri1.lower()[0:6] or ans1.lower()[0:6] == pyveri2.lower()[0:6]:
+                                    print("Please Type the number of python folder. But you name of python folder.  ")
+                                    continue
+                                else:
+                                    print("Error : {} not found".format(ans1))
+                                    continue
                             else:
-                                print("Error : {} not found".format(ans1))
+                                print("Error : Please select the number of your python folder")
                                 continue
-                        else:
-                            print("Error : Please select your python folder")
+                        except ValueError:
+                            print("ValueError: {} not found The Number of folder must be a number".format(ans1))
                             continue
-                            sys.exit()
                     os.system("cd C:\\Users\\{}\\AppData\\Local\\Programs\\Python\\{}\\Scripts && pip.exe install {}".format(user,veri,mod))
                     more = input("Do You want to install more ? [Yes/No] : ")
                     if more.lower()=="yes" or  more.lower()=="y":
@@ -71,17 +77,21 @@ try:
                             print("({})".format(i), pyveri)
                         print("You have many folder or versions of python. \nPlease Select your python folder or latest version")
                         while True:
-                            foldernum=input("Type the Number of your python folder whick show in display : ")
-                            if foldernum:
-                                if int(foldernum) > i:
-                                    print("Error: {} not found \nThe number you type is too high and not found in the list of folders.".format(foldernum))
-                                    continue
+                            try:
+                                foldernum=int(input("Type the Number of your python folder whick show in display : "))
+                                if foldernum:
+                                    if foldernum > i:
+                                        print("Error: {} not found \nThe number you type is too high and not found in the list of folders.".format(foldernum))
+                                        continue
+                                    else:
+                                        break
                                 else:
-                                    break
-                            else:
-                                print("\n\n\n\nError: Please type number of Python folder")
-                                versioninfo()                        
-                        gen = veri[int(foldernum)]
+                                    print("\n\n\n\nError: Please type number of Python folder")
+                                    versioninfo()
+                            except ValueError:
+                                print("ValueError: The Folder Number must be a number")  
+                                continue                      
+                        gen = veri[foldernum]
                         return gen
                     veri = versioninfo()
                     os.system("cd C:\\Users\\{}\\AppData\\Local\\Programs\\Python\\{}\\Scripts && pip.exe install {}".format(user,veri,mod))
@@ -106,5 +116,4 @@ try:
             print("Please Type Module Name or type Exit to exit")
             continue
 except Exception as e:
-    print("Error : ",e,"\n Please Try again")
-
+    print("Error : ",e,"\nPlease Try again")
